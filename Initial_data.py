@@ -9,6 +9,13 @@ parking_lots = [
     {"id": 4, "name": "Lot E", "x": 4, "y": 5, "capacity": 25, "parked": 10}
 ]
 
+
+def closest_Parking_lot:
+
+def Directions:
+
+
+
 # Sample user location
 user_x, user_y = 3, 4
 
