@@ -10,6 +10,8 @@ parking_lots = [
 ]
 
 
+
+
 def closest_Parking_lot:
 
 def Directions:
