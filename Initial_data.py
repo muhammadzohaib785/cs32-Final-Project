@@ -69,3 +69,53 @@ def show_city_map(G, parking_lots, destination):
 
     nx.draw(G, pos, with_labels=True, node_color=colors, node_size=600)
     plt.show()
+
+
+user_node = 0
+destination_node = 24
+
+
+best_lot = find_best_parking(destination_node, parking_lots, G)
+
+if best_lot:
+    print(f"Closest available parking lot to destination {destination_node}:")
+    print(f"- Lot Name: {best_lot[1]}")
+    print(f"- Located at node: {best_lot[0]}")
+    print(f"- Distance to destination: {best_lot[2]} steps")
+else:
+    print("No available parking lots found.")
+
+
+
+
+def show_city_map(G, parking_lots, user_node, destination_node):
+    pos = nx.spring_layout(G, seed=42)  # Layout for consistent visuals
+    colors = []
+
+    for node in G.nodes():
+        if node == user_node:
+            colors.append("blue")
+        elif node == destination_node:
+            colors.append("yellow")
+        elif node in parking_lots:
+            lot = parking_lots[node]
+            if lot["parked"] < lot["capacity"]:
+                colors.append("green")
+            else:
+                colors.append("red")
+        else:
+            colors.append("gray")
+
+    nx.draw(G, pos, with_labels=True, node_color=colors, node_size=600)
+    labels = {node: parking_lots[node]["name"] for node in parking_lots}
+    nx.draw_networkx_labels(G, pos, labels=labels, font_color="white")
+    plt.title("Simulated City Map with Parking Lots")
+    plt.show()
+
+
+
+
+show_city_map(G, parking_lots, user_node, destination_node)
+
+
+
