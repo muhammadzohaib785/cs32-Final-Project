@@ -12,20 +12,9 @@ parking_lots = [
 
 
 
-def closest_Parking_lot:
-
-def Directions:
 
 
 
-# Sample user location
-user_x, user_y = 3, 4
 
-# Find the closest lot with space
-def distance(x1, y1, x2, y2):
-    return ((x1 - x2)**2 + (y1 - y2)**2)**0.5
 
-available_lots = [lot for lot in parking_lots if lot["parked"] < lot["capacity"]]
-closest_lot = min(available_lots, key=lambda lot: distance(user_x, user_y, lot["x"], lot["y"]))
 
-print(f"Closest available lot: {closest_lot['name']}")
