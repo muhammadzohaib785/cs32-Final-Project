@@ -1,20 +1,68 @@
-# main.py
-
-# Sample parking lot data
-parking_lots = [
-    {"id": 0, "name": "Lot A", "x": 2, "y": 3, "capacity": 50, "parked": 20},
-    {"id": 1, "name": "Lot B", "x": 5, "y": 7, "capacity": 30, "parked": 25},
-    {"id": 2, "name": "Lot C", "x": 1, "y": 1, "capacity": 20, "parked": 15},
-    {"id": 3, "name": "Lot D", "x": 8, "y": 2, "capacity": 40, "parked": 40},
-    {"id": 4, "name": "Lot E", "x": 4, "y": 5, "capacity": 25, "parked": 10}
-]
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 
+# Simulated city grid as a graph
+G = nx.grid_2d_graph(5, 5)  # 5x5 grid (25 nodes)
+
+# Relabel nodes to integers for clarity
+G = nx.convert_node_labels_to_integers(G)
+
+# Example: Add weights to edges (distance = 1 for all)
+for (u, v) in G.edges():
+    G.edges[u, v]['weight'] = 1
+
+
+parking_lots = {
+    2: {"name": "Lot A", "capacity": 10, "parked": 3},
+    6: {"name": "Lot B", "capacity": 5, "parked": 5},  # full
+    20: {"name": "Lot C", "capacity": 8, "parked": 4}
+}
+
+
+
+def find_best_parking(destination_node, parking_lots, G):
+    best_lot = None
+    best_distance = float("inf")
+
+    for node, data in parking_lots.items():
+        if data["parked"] < data["capacity"]:
+            try:
+                dist = nx.shortest_path_length(G, source=node, target=destination_node, weight='weight')
+                if dist < best_distance:
+                    best_distance = dist
+                    best_lot = (node, data["name"], dist)
+            except nx.NetworkXNoPath:
+                continue
+
+    return best_lot
+
+
+destination = 24  # Bottom right of the grid
+result = find_best_parking(destination, parking_lots, G)
+
+if result:
+    print(f"Best lot: {result[1]} at node {result[0]} (distance {result[2]})")
+else:
+    print("No available parking lots found.")
 
 
 
 
+def show_city_map(G, parking_lots, destination):
+    pos = nx.spring_layout(G)
+    colors = []
 
+    for node in G.nodes():
+        if node == destination:
+            colors.append("blue")
+        elif node in parking_lots and parking_lots[node]["parked"] < parking_lots[node]["capacity"]:
+            colors.append("green")
+        elif node in parking_lots:
+            colors.append("red")
+        else:
+            colors.append("gray")
 
-
+    nx.draw(G, pos, with_labels=True, node_color=colors, node_size=600)
+    plt.show()
