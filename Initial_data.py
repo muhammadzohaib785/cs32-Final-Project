@@ -110,7 +110,8 @@ def show_city_map(G, parking_lots, user_node, destination_node):
     labels = {node: parking_lots[node]["name"] for node in parking_lots}
     nx.draw_networkx_labels(G, pos, labels=labels, font_color="white")
     plt.title("Simulated City Map with Parking Lots")
-    plt.show()
+    plt.savefig("city_map.png")
+    print("Map saved as city_map.png")
 
 
 
