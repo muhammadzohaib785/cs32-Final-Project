@@ -1,6 +1,6 @@
 import networkx as nx
-
-def build_city_graph(size=5):
+size = 5
+def build_city_graph(size):
     """
     Creates a 2D grid graph representing a simplified city.
     Each node is connected to its neighbors, forming a square grid.
