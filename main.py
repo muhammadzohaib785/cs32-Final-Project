@@ -5,7 +5,7 @@ from visualize import show_city_map
 from destination_data import destinations
 
 # Build the graph
-G = build_city_graph()
+G = build_city_graph(10)
 user_node = 0  # Starting point is fixed for now
 
 # Show available destinations
