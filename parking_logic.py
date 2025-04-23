@@ -16,13 +16,13 @@ def find_best_parking(destination_node, parking_lots, G):
     best_distance = float("inf")
 
     for node, data in parking_lots.items():
-        if data["parked"] < data["capacity"]:  # Only consider available lots
+        if data["parked"] < data["capacity"]:
             try:
                 dist = nx.shortest_path_length(G, source=node, target=destination_node, weight='weight')
                 if dist < best_distance:
                     best_distance = dist
                     best_lot = (node, data["name"], dist)
             except nx.NetworkXNoPath:
-                continue  # Skip lots not connected to destination
+                continue  
 
     return best_lot

@@ -7,7 +7,7 @@ import networkx as nx
 def show_city_map(G, parking_lots, user_node, destination_node):
     pos = nx.spring_layout(G, seed=1)
 
-    # Decide color for each node
+
     colors = []
     labels = {}
 
