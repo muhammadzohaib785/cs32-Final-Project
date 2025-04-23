@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 
+
+#This was made with the help of chatGPT to demonstrate how my code works
+
 def show_city_map(G, parking_lots, user_node, destination_node):
     pos = nx.spring_layout(G, seed=1)
 
