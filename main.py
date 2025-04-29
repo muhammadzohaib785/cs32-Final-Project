@@ -4,7 +4,10 @@ from parking_logic import find_best_parking
 from visualize import show_city_map
 from destination_data import destinations
 
-G = build_city_graph(10)
+# Set size of city
+SIZE = 10
+
+G = build_city_graph(SIZE)
 user_node = 0
 
 print("Available destinations:")

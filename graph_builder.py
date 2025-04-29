@@ -1,5 +1,5 @@
 import networkx as nx
-size = 5
+
 def build_city_graph(size):
     """
     Creates a 2D grid graph representing a simplified city.
