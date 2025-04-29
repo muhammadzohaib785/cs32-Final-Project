@@ -14,6 +14,9 @@ def build_city_graph(size):
     G = nx.grid_2d_graph(size, size)
     G = nx.convert_node_labels_to_integers(G)
     for (u, v) in G.edges():
-        G.edges[u, v]['weight'] = 1
+        if RANDOM_EDGE_WEIGHTS:
+            pass
+        else:
+            G.edges[u, v]['weight'] = 1
     return G
 

@@ -6,6 +6,7 @@ from destination_data import destinations
 
 # Set size of city
 SIZE = 6
+RANDOM_EDGE_WEIGHTS = False
 
 G = build_city_graph(SIZE)
 user_node = 0
