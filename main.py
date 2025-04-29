@@ -5,7 +5,7 @@ from visualize import show_city_map
 from destination_data import destinations
 
 # Set size of city
-SIZE = 10
+SIZE = 3
 
 G = build_city_graph(SIZE)
 user_node = 0
