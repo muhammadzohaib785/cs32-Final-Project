@@ -32,3 +32,7 @@ else:
         print("No available parking lots near your destination.")
 
     show_city_map(G, parking_lots, user_node, destination_node)
+
+    # Print all edge weights
+    for u, v, data in G.edges(data=True):
+        print(f"Edge ({u}, {v}) has weight {data.get('weight')}")
