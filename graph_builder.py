@@ -1,4 +1,7 @@
 import networkx as nx
+import random
+
+RANDOM_EDGE_WEIGHTS = False
 
 def build_city_graph(size):
     """
@@ -10,12 +13,14 @@ def build_city_graph(size):
 
     Returns:
         networkx.Graph: A graph with weighted edges (weight = 1).
+
+
     """
     G = nx.grid_2d_graph(size, size)
     G = nx.convert_node_labels_to_integers(G)
     for (u, v) in G.edges():
         if RANDOM_EDGE_WEIGHTS:
-            pass
+            G.edges[u, v]['weight'] = random.randint(1,5)
         else:
             G.edges[u, v]['weight'] = 1
     return G
