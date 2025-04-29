@@ -1,7 +1,7 @@
 import networkx as nx
 import random
 
-RANDOM_EDGE_WEIGHTS = False
+RANDOM_EDGE_WEIGHTS = True
 
 def build_city_graph(size):
     """
