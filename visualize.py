@@ -4,30 +4,38 @@ import networkx as nx
 def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=6):
     pos = {i * size + j: (j, -i) for i in range(size) for j in range(size)}  # grid layout
     colors = []
-    labels = {}
 
-    # Invert the destinations dictionary to look up names by node
     from destination_data import destinations
     destination_names_by_node = {v: k.capitalize() for k, v in destinations.items()}
 
-    # Separate label dicts
+    # Separate label dicts and style dicts
     normal_labels = {}
     destination_labels = {}
+    whitebox_labels = {}  # nodes whose labels should have a white background
+    whitebox_pos = {}
 
     for node in G.nodes():
         if node == user_node:
             colors.append("blue")
-            normal_labels[node] = f"User ({node})"
+            label = f"User ({node})"
+            normal_labels[node] = label
+            whitebox_labels[node] = label
         elif node == destination_node:
             colors.append("yellow")
-            destination_labels[node] = f"{destination_names_by_node.get(node, 'Dest')} ({node})"
+            label = f"{destination_names_by_node.get(node, 'Dest')} ({node})"
+            destination_labels[node] = label
+            whitebox_labels[node] = label
         elif node in parking_lots:
             lot = parking_lots[node]
             colors.append("green" if lot["parked"] < lot["capacity"] else "red")
-            normal_labels[node] = f"{lot['name']} ({node})"
+            label = f"{lot['name']} ({node})"
+            normal_labels[node] = label
+            whitebox_labels[node] = label
         elif node in destination_names_by_node:
             colors.append("orange")
-            destination_labels[node] = f"{destination_names_by_node[node]} ({node})"
+            label = f"{destination_names_by_node[node]} ({node})"
+            destination_labels[node] = label
+            whitebox_labels[node] = label
         else:
             colors.append("gray")
             normal_labels[node] = str(node)
@@ -44,13 +52,20 @@ def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=
         edge_path = list(zip(path, path[1:]))
         nx.draw_networkx_edges(G, pos, edgelist=edge_path, edge_color="black", width=3)
 
-    # Draw labels
-    nx.draw_networkx_labels(G, pos, labels=normal_labels, font_size=8)
+    # Draw regular labels (centered, no background)
+    plain_labels = {node: lbl for node, lbl in normal_labels.items() if node not in whitebox_labels}
+    nx.draw_networkx_labels(G, pos, labels=plain_labels, font_size=8)
 
-    # Offset destination labels only
+    # Offset destination labels
     label_offset = -0.5
     dest_label_pos = {node: (x, y + label_offset) for node, (x, y) in pos.items() if node in destination_labels}
-    nx.draw_networkx_labels(G, dest_label_pos, labels=destination_labels, font_size=8)
+    nx.draw_networkx_labels(G, dest_label_pos, labels=destination_labels, font_size=8,
+                            bbox=dict(facecolor='white', edgecolor='none', pad=1))
+
+    # Draw whitebox labels (user, lots, selected destination) — on top of nodes
+    whitebox_label_pos = {node: pos[node] for node in whitebox_labels if node not in destination_labels}
+    nx.draw_networkx_labels(G, whitebox_label_pos, labels=whitebox_labels, font_size=8,
+                            bbox=dict(facecolor='white', edgecolor='none', pad=1))
 
     plt.title("City Map with Parking Lots and Shortest Path")
     plt.savefig("city_map.png")
