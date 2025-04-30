@@ -16,7 +16,6 @@ def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=
             labels[node] = f"User ({node})"
         elif node == destination_node:
             colors.append("yellow")
-            # Use name from the reversed dictionary
             labels[node] = f"{destination_names_by_node.get(node, 'Dest')} ({node})"
         elif node in parking_lots:
             lot = parking_lots[node]
@@ -29,14 +28,22 @@ def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=
             colors.append("gray")
             labels[node] = str(node)
 
-    nx.draw(G, pos, node_color=colors, labels=labels, with_labels=True, node_size=500)
+    # Draw nodes only (not labels)
+    nx.draw_networkx_nodes(G, pos, node_color=colors, node_size=500)
 
+    # Draw all edges with weights as width
     weights = [G[u][v]['weight'] for u, v in G.edges()]
     nx.draw_networkx_edges(G, pos, width=[w for w in weights])
 
+    # Draw path if available
     if path:
         edge_path = list(zip(path, path[1:]))
         nx.draw_networkx_edges(G, pos, edgelist=edge_path, edge_color="black", width=3)
+
+    # Draw labels BELOW nodes
+    label_offset = -0.5  # adjust as needed
+    label_pos = {node: (x, y + label_offset) for node, (x, y) in pos.items()}
+    nx.draw_networkx_labels(G, label_pos, labels, font_size=8)
 
     plt.title("City Map with Parking Lots and Shortest Path")
     plt.savefig("city_map.png")
