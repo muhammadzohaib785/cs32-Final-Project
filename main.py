@@ -64,7 +64,7 @@ else:
     full_path = None
 
 # Visualize map
-show_city_map(G, parking_lots, user_node, destination_node, path)
+show_city_map(G, parking_lots, user_node, destination_node, full_path, size=SIZE)
 
 # Print edge weights
 print("\nEdge Weights:")
