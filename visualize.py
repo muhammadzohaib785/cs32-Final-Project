@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 
+#U significantly used chat gpt for this code:
+
 def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=6):
     pos = {i * size + j: (j, -i) for i in range(size) for j in range(size)}  # grid layout
     colors = []
