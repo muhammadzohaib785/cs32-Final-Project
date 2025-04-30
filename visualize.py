@@ -62,10 +62,13 @@ def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=
     nx.draw_networkx_labels(G, dest_label_pos, labels=destination_labels, font_size=8,
                             bbox=dict(facecolor='white', edgecolor='none', pad=1))
 
-    # Draw whitebox labels (user, lots, selected destination) — on top of nodes
-    whitebox_label_pos = {node: pos[node] for node in whitebox_labels if node not in destination_labels}
-    nx.draw_networkx_labels(G, whitebox_label_pos, labels=whitebox_labels, font_size=8,
-                            bbox=dict(facecolor='white', edgecolor='none', pad=1))
+    # Draw whitebox labels (user and parking lots) — centered
+    non_destination_whitebox_labels = {
+    node: label for node, label in whitebox_labels.items() if node not in destination_labels
+    }
+    non_destination_whitebox_pos = {node: pos[node] for node in non_destination_whitebox_labels}
+    nx.draw_networkx_labels(G, non_destination_whitebox_pos, labels=non_destination_whitebox_labels,
+                        font_size=8, bbox=dict(facecolor='white', edgecolor='none', pad=1))
 
     plt.title("City Map with Parking Lots and Shortest Path")
     plt.savefig("city_map.png")

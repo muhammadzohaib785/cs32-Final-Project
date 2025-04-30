@@ -1,7 +1,7 @@
 
 destinations = {
     "hospital": 24,
-    "library": 29,
+    "library": 5,
     "mall": 14,
     "school": 10,
     "stadium": 13,
