@@ -7,7 +7,7 @@ import networkx as nx
 
 # Set size of city
 SIZE = 6
-G = build_city_graph(SIZE)
+G = build_balanced_city_graph(SIZE)
 
 # Show available destinations
 print("Available destinations:")

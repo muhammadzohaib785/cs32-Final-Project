@@ -3,25 +3,26 @@ import random
 
 RANDOM_EDGE_WEIGHTS = True
 
-def build_city_graph(size):
-    """
-    Creates a 2D grid graph representing a simplified city.
-    Each node is connected to its neighbors, forming a square grid.
-
-    Parameters:
-        size (int): The width/height of the grid. Default is 5 for a 5x5 grid.
-
-    Returns:
-        networkx.Graph: A graph with weighted edges (weight = 1).
-
-
-    """
+def build_balanced_city_graph(size):
     G = nx.grid_2d_graph(size, size)
     G = nx.convert_node_labels_to_integers(G)
-    for (u, v) in G.edges():
-        if RANDOM_EDGE_WEIGHTS:
-            G.edges[u, v]['weight'] = random.randint(1,5)
-        else:
-            G.edges[u, v]['weight'] = 1
-    return G
 
+    # Set horizontal weights
+    for i in range(size):
+        row_total = 10  # or any fixed total
+        weights = [row_total // (size - 1)] * (size - 1)
+        for j in range(size - 1):
+            u = i * size + j
+            v = u + 1
+            G.edges[u, v]['weight'] = weights[j]
+
+    # Set vertical weights
+    for j in range(size):
+        col_total = 10
+        weights = [col_total // (size - 1)] * (size - 1)
+        for i in range(size - 1):
+            u = i * size + j
+            v = u + size
+            G.edges[u, v]['weight'] = weights[i]
+
+    return G
