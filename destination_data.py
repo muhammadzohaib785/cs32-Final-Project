@@ -1,9 +1,9 @@
 
 destinations = {
     "hospital": 24,
-    "library": 18,
-    "mall": 12,
-    "school": 7,
-    "stadium": 0,
+    "library": 29,
+    "mall": 14,
+    "school": 10,
+    "stadium": 13,
     "university": 21
 }
