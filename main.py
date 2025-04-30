@@ -34,8 +34,15 @@ if user_node not in G.nodes():
     print("Invalid start node. Not in graph.")
     exit()
 
+# Exclude current location if it's a parking lot
+if user_node in parking_lots:
+    print("\nYou are currently at a parking lot. Searching for the next closest one...")
+    adjusted_parking_lots = {node: lot for node, lot in parking_lots.items() if node != user_node}
+else:
+    adjusted_parking_lots = parking_lots
+
 # Find best parking lot near the user
-best_lot = find_best_parking(user_node, parking_lots, G)
+best_lot = find_best_parking(user_node, adjusted_parking_lots, G)
 
 # Show best parking lot
 if best_lot:
@@ -46,13 +53,15 @@ if best_lot:
 else:
     print("No available parking lots near your location.")
 
+# Compute driving and walking paths
 if best_lot:
     parking_node = best_lot[0]
     try:
         drive_path = nx.shortest_path(G, source=user_node, target=parking_node, weight='weight')
         walk_path = nx.shortest_path(G, source=parking_node, target=destination_node, weight='weight')
-        full_path = drive_path[:-1] + walk_path  # combine without duplicating the parking node
+        full_path = drive_path[:-1] + walk_path  # avoid repeating the parking node
 
+        print("\nDirections:")
         print("🚗 Drive to Parking Lot:")
         print(" -> ".join(map(str, drive_path)))
         print("🚶 Walk from Parking Lot to Destination:")
