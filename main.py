@@ -17,9 +17,10 @@ for name in destinations:
 # Get destination
 destination_name = input("\nEnter your destination: ").strip().lower()
 
-if destination_name not in destinations:
+while destination_name not in destinations:
     print("Destination not recognized. Please try again.")
-    exit()
+    destination_name = input("\nEnter your destination: ").strip().lower()
+    continue
 
 destination_node = destinations[destination_name]
 
