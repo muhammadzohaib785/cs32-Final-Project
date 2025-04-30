@@ -46,14 +46,22 @@ if best_lot:
 else:
     print("No available parking lots near your location.")
 
-# Get shortest path to destination
-try:
-    path = nx.shortest_path(G, source=user_node, target=destination_node, weight='weight')
-    print("\nShortest path to your destination:")
-    print(" -> ".join(map(str, path)))
-except nx.NetworkXNoPath:
-    path = None
-    print("No path found from your location to the destination.")
+if best_lot:
+    parking_node = best_lot[0]
+    try:
+        drive_path = nx.shortest_path(G, source=user_node, target=parking_node, weight='weight')
+        walk_path = nx.shortest_path(G, source=parking_node, target=destination_node, weight='weight')
+        full_path = drive_path[:-1] + walk_path  # combine without duplicating the parking node
+
+        print("🚗 Drive to Parking Lot:")
+        print(" -> ".join(map(str, drive_path)))
+        print("🚶 Walk from Parking Lot to Destination:")
+        print(" -> ".join(map(str, walk_path)))
+    except nx.NetworkXNoPath:
+        full_path = None
+        print("No path found from your location to the destination.")
+else:
+    full_path = None
 
 # Visualize map
 show_city_map(G, parking_lots, user_node, destination_node, path)
