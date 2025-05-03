@@ -42,15 +42,24 @@ if user_node in parking_lots:
 else:
     adjusted_parking_lots = parking_lots
 
-# Find best parking lot near the user
-best_lot = find_best_parking(user_node, adjusted_parking_lots, G)
+
+
+# Ask user preference
+preference = input("Do you prefer to walk less or drive less? (walk/drive): ").strip().lower()
+
+while preference not in ["walk", "drive"]:
+    print("Please type 'walk' or 'drive'.")
+    preference = input("Do you prefer to walk less or drive less? (walk/drive): ").strip().lower()
+
+
+best_lot = find_best_parking(user_node, destination_node, adjusted_parking_lots, G, preference=preference)
 
 # Show best parking lot
 if best_lot:
-    print("\nBest parking lot found:")
     print(f"- Name: {best_lot[1]}")
     print(f"- Located at node: {best_lot[0]}")
-    print(f"- Distance from you: {best_lot[2]} steps")
+    print(f"- Distance to drive: {best_lot[2]} steps")
+    print(f"- Distance to walk: {best_lot[3]} steps")
 else:
     print("No available parking lots near your location.")
 
