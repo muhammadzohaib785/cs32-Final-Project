@@ -4,6 +4,6 @@ destinations = {
     "library": 5,
     "mall": 14,
     "school": 10,
-    "stadium": 13,
+    "stadium": 13, 
     "university": 21
 }
