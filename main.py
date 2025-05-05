@@ -1,4 +1,4 @@
-from graph_builder import build_balanced_city_graph
+from graph_builder import build_random_city_graph
 from parking_data import parking_lots
 from parking_logic import find_best_parking
 from visualize import show_city_map
