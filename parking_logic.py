@@ -10,7 +10,7 @@ def get_drive_dist(candidate):
 
 def dijkstra(graph, start, target):
     """
-    Just for reference, I had found this in the Networkx library
+    Just for reference, I had found this function in the Networkx library
     that implemented Dijsktra but I chose to present Dijstkra here myself for
     the computational task requirement
 
@@ -26,7 +26,7 @@ def dijkstra(graph, start, target):
         curr_dist, curr_node = heapq.heappop(heap)
 
         if curr_node == target:
-            return curr_dist  
+            return curr_dist
 
         if curr_node in visited:
             continue
