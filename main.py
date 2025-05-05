@@ -39,6 +39,7 @@ if user_node not in G.nodes():
 # Check if the Node entered might be a parking lot itself.
 if user_node in parking_lots:
     print("\nYou are currently at a parking lot. Searching for the next closest one...")
+    #GPT helped here; basically removes the parking lot we are at temporarily from the dictionary of the available parking lots
     adjusted_parking_lots = {node: lot for node, lot in parking_lots.items() if node != user_node}
 else:
     adjusted_parking_lots = parking_lots
