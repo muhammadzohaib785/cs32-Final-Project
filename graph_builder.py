@@ -2,30 +2,25 @@ import networkx as nx
 import random
 
 
-#GPT Helped build the Map
+
 def random_partition(n, total):
+
     """
     Returns a list of `n` positive integers that sum to `total`,
     where each part is randomly determined.
     """
 
-    # Step 1: Choose n - 1 random cut points between 1 and total - 1
     cut_points = random.sample(range(1, total), n - 1)
 
-    # Step 2: Sort the cut points to create meaningful partitions
     cut_points.sort()
 
-    # Step 3: Initialize the list to store the partitioned values
     parts = []
 
-    # Step 4: The first part is from 0 to the first cut point
     parts.append(cut_points[0])
 
-    # Step 5: The middle parts are differences between consecutive cut points
     for i in range(1, len(cut_points)):
         parts.append(cut_points[i] - cut_points[i - 1])
 
-    # Step 6: The last part is from the last cut point to the total
     parts.append(total - cut_points[-1])
 
     return parts
