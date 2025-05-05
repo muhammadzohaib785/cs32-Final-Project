@@ -5,11 +5,11 @@ from visualize import show_city_map
 from destination_data import destinations
 import networkx as nx
 
-# Set size of city
+# defines the size of the city and 
 SIZE = 6
 G = build_balanced_city_graph(SIZE)
 
-# Show available destinations
+
 print("Available destinations:")
 for name in destinations:
     print(f"- {name}")
