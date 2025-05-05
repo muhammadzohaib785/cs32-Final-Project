@@ -9,6 +9,7 @@ def get_drive_dist(candidate):
 
 
 def dijkstra(graph, start, target):
+
     """
     Just for reference, I had found this function in the Networkx library
     that implemented Dijsktra but I chose to present Dijstkra here myself for
@@ -17,6 +18,7 @@ def dijkstra(graph, start, target):
     Function: nx.shortest_path_length()
 
     """
+    
     distances = {node: float('inf') for node in graph.nodes}
     distances[start] = 0
     visited = set()
@@ -68,3 +70,4 @@ def find_best_parking(user_node, destination_node, parking_lots, G, preference="
         candidates.sort(key=get_drive_dist)
 
     return candidates[0]
+
