@@ -54,7 +54,7 @@ while preference not in ["walk", "drive"]:
 
 best_lot = find_best_parking(user_node, destination_node, adjusted_parking_lots, G, preference=preference)
 
-# Show best parking lot
+# Let the user know all the important details.
 if best_lot:
     print(f"- Name: {best_lot[1]}")
     print(f"- Located at node: {best_lot[0]}")
