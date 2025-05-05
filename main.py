@@ -18,7 +18,6 @@ for name in destinations:
 destination_name = input("\nEnter your destination: ").strip().lower()
 
 #keeps asking for destination untill correct inputed
-
 while destination_name not in destinations:
     print("Destination not recognized. Please try again.")
     destination_name = input("\nEnter your destination: ").strip().lower()
