@@ -5,7 +5,8 @@ from visualize import show_city_map
 from destination_data import destinations
 import networkx as nx
 
-# defines the size of the city and
+# Builds a City using a basic function from the Library Networkx
+
 SIZE = 6
 G = build_random_city_graph(SIZE)
 
@@ -32,7 +33,7 @@ except ValueError:
     print("Invalid input. Please enter an integer.")
     exit()
 
-if user_node not in G.nodes():
+while user_node not in G.nodes():
     print("Invalid start node. Not in graph.")
     exit()
 
@@ -74,12 +75,15 @@ if best_lot:
 
         print("\nDirections:")
         print("🚗 Drive to Parking Lot:")
+        #GPT helped how to efficiently print Nodes together
         print(" -> ".join(map(str, drive_path)))
         print("🚶 Walk from Parking Lot to Destination:")
         print(" -> ".join(map(str, walk_path)))
+
     except nx.NetworkXNoPath:
         full_path = None
         print("No path found from your location to the destination.")
+
 else:
     full_path = None
 
