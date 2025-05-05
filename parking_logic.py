@@ -18,13 +18,14 @@ def dijkstra(graph, start, target):
     Function: nx.shortest_path_length()
 
     """
-    
+
     distances = {node: float('inf') for node in graph.nodes}
     distances[start] = 0
     visited = set()
     heap = [(0, start)]
 
     while heap:
+
         curr_dist, curr_node = heapq.heappop(heap)
 
         if curr_node == target:

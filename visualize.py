@@ -22,22 +22,26 @@ def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=
             label = f"User ({node})"
             normal_labels[node] = label
             whitebox_labels[node] = label
+
         elif node == destination_node:
             colors.append("yellow")
             label = f"{destination_names_by_node.get(node, 'Dest')} ({node})"
             destination_labels[node] = label
             whitebox_labels[node] = label
+
         elif node in parking_lots:
             lot = parking_lots[node]
             colors.append("green" if lot["parked"] < lot["capacity"] else "red")
             label = f"{lot['name']} ({node})"
             normal_labels[node] = label
             whitebox_labels[node] = label
+
         elif node in destination_names_by_node:
             colors.append("orange")
             label = f"{destination_names_by_node[node]} ({node})"
             destination_labels[node] = label
             whitebox_labels[node] = label
+            
         else:
             colors.append("gray")
             normal_labels[node] = str(node)
