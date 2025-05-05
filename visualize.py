@@ -14,7 +14,7 @@ def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=
     normal_labels = {}
     destination_labels = {}
     whitebox_labels = {}  # nodes whose labels should have a white background
-    whitebox_pos = {}
+    
 
     for node in G.nodes():
         if node == user_node:
@@ -41,7 +41,7 @@ def show_city_map(G, parking_lots, user_node, destination_node, path=None, size=
             label = f"{destination_names_by_node[node]} ({node})"
             destination_labels[node] = label
             whitebox_labels[node] = label
-            
+
         else:
             colors.append("gray")
             normal_labels[node] = str(node)
