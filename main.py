@@ -5,7 +5,7 @@ from visualize import show_city_map
 from destination_data import destinations
 import networkx as nx
 
-# defines the size of the city and 
+# defines the size of the city and
 SIZE = 6
 G = build_balanced_city_graph(SIZE)
 
@@ -16,6 +16,8 @@ for name in destinations:
 
 # Get destination
 destination_name = input("\nEnter your destination: ").strip().lower()
+
+#keeps asking for destination untill correct inputed
 
 while destination_name not in destinations:
     print("Destination not recognized. Please try again.")
