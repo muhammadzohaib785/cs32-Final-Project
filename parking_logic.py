@@ -26,7 +26,7 @@ def find_best_parking(user_node, destination_node, parking_lots, G, preference="
     if not candidates:
         return None
 
-    #Now based on the preferences,
+    #Now based on the preferences, sort the lists that have the possible parking lots, the first one will be the closest. 
 
     if preference == "walk":
         candidates.sort(key=get_walk_dist)

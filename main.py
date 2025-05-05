@@ -44,7 +44,6 @@ else:
     adjusted_parking_lots = parking_lots
 
 
-
 # Since some users might prefer to walk more, and some might prefer to drive more, we can ask what is to be preferred.
 preference = input("Do you prefer to walk less or drive less? (walk/drive): ").strip().lower()
 
