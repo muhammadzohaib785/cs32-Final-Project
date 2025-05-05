@@ -26,16 +26,19 @@ while destination_name not in destinations:
 
 destination_node = destinations[destination_name]
 
-#Prompt the user to get the correct start number
-try:
-    user_node = int(input("Enter your current location (node number): "))
-except ValueError:
-    print("Invalid input. Please enter an integer.")
-    exit()
-
-while user_node not in G.nodes():
-    print("Invalid start node. Not in graph.")
-    exit()
+#keep prompting the user to return the correct code untill they do so.
+while True:
+    try:
+        user_node = int(input("Enter your current location (node number between 0 and 35): "))
+        if user_node < 0 or user_node >= 36:
+            print(f"Invalid node. You can only choose a number between 0 and {SIZE * SIZE - 1}.")
+            continue
+        if user_node not in G.nodes():
+            print("That node does not exist in the current city graph. Try again.")
+            continue
+        break
+    except ValueError:
+        print("Invalid input. Please enter an integer between 0 and 35.")
 
 # Check if the Node entered might be a parking lot itself.
 if user_node in parking_lots:
