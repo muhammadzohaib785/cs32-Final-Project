@@ -7,7 +7,7 @@ import networkx as nx
 
 # defines the size of the city and
 SIZE = 6
-G = build_balanced_city_graph(SIZE)
+G = build_random_city_graph(SIZE)
 
 
 print("Available destinations:")
