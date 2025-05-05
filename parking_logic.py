@@ -39,6 +39,7 @@ def dijkstra(graph, start, target):
 
             if new_dist < distances[neighbor]:
                 distances[neighbor] = new_dist
+                #Heap helps quicky add item to Queue and Remove the smallest item from the list
                 heapq.heappush(heap, (new_dist, neighbor))
 
     return float('inf')
