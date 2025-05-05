@@ -24,7 +24,7 @@ while destination_name not in destinations:
 
 destination_node = destinations[destination_name]
 
-# Get user location
+#Prompt the user to get the correct start number
 try:
     user_node = int(input("Enter your current location (node number): "))
 except ValueError:
@@ -35,7 +35,7 @@ if user_node not in G.nodes():
     print("Invalid start node. Not in graph.")
     exit()
 
-# Exclude current location if it's a parking lot
+# Check if the Node entered might be a parking lot itself.
 if user_node in parking_lots:
     print("\nYou are currently at a parking lot. Searching for the next closest one...")
     adjusted_parking_lots = {node: lot for node, lot in parking_lots.items() if node != user_node}
@@ -44,7 +44,7 @@ else:
 
 
 
-# Ask user preference
+# Since some users might prefer to walk more, and some might prefer to drive more, we can ask what is to be preferred.
 preference = input("Do you prefer to walk less or drive less? (walk/drive): ").strip().lower()
 
 while preference not in ["walk", "drive"]:
@@ -85,7 +85,4 @@ else:
 # Visualize map
 show_city_map(G, parking_lots, user_node, destination_node, full_path, size=SIZE)
 
-# Print edge weights
-print("\nEdge Weights:")
-for u, v, data in G.edges(data=True):
-    print(f"Edge ({u}, {v}) has weight {data['weight']}")
+
