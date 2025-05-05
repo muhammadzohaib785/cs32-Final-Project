@@ -82,7 +82,7 @@ if best_lot:
 else:
     full_path = None
 
-# Visualize map
+# Visualize map using Visualise.py
 show_city_map(G, parking_lots, user_node, destination_node, full_path, size=SIZE)
 
 
