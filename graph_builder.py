@@ -2,6 +2,7 @@ import networkx as nx
 import random
 
 
+#GPT Helped build the Map
 def random_partition(n, total):
     """
     Returns a list of `n` positive integers that sum to `total`,
