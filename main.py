@@ -40,6 +40,7 @@ while True:
     except ValueError:
         print("Invalid input. Please enter an integer between 0 and 35.")
 
+
 # Check if the Node entered might be a parking lot itself.
 if user_node in parking_lots:
     print("\nYou are currently at a parking lot. Searching for the next closest one...")
@@ -47,6 +48,7 @@ if user_node in parking_lots:
     adjusted_parking_lots = {node: lot for node, lot in parking_lots.items() if node != user_node}
 else:
     adjusted_parking_lots = parking_lots
+
 
 
 # Since some users might prefer to walk more, and some might prefer to drive more, we can ask what is to be preferred.
@@ -57,7 +59,9 @@ while preference not in ["walk", "drive"]:
     preference = input("Do you prefer to walk less or drive less? (walk/drive): ").strip().lower()
 
 
+
 best_lot = find_best_parking(user_node, destination_node, adjusted_parking_lots, G, preference=preference)
+
 
 # Let the user know all the important details.
 if best_lot:
@@ -68,7 +72,8 @@ if best_lot:
 else:
     print("No available parking lots near your location.")
 
-# Compute driving and walking paths
+
+# using other functions in the library available, based on the preference of the user find the shortest path.
 if best_lot:
     parking_node = best_lot[0]
     try:
@@ -78,7 +83,7 @@ if best_lot:
 
         print("\nDirections:")
         print("🚗 Drive to Parking Lot:")
-        #GPT helped how to efficiently print Nodes together
+        #GPT helped in this line on how to efficiently print Nodes together
         print(" -> ".join(map(str, drive_path)))
         print("🚶 Walk from Parking Lot to Destination:")
         print(" -> ".join(map(str, walk_path)))
